@@ -1,0 +1,379 @@
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TotemVanilla | Minecraft</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b1220;
+            color: white;
+        }
+
+        /* NAVBAR */
+        nav {
+            height: 70px;
+            background: #111b2e;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            border-bottom: 1px solid #263653;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4da3ff;
+        }
+
+        nav a {
+            color: #dbeafe;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #4da3ff;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+
+            background:
+                linear-gradient(#08111ddd, #08111ddd),
+                url("https://images.unsplash.com/photo-1607988795691-3d0147b43231?auto=format&fit=crop&w=1800&q=80");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            margin-bottom: 15px;
+            text-shadow: 4px 4px #000;
+        }
+
+        .blue {
+            color: #4da3ff;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        /* BUTTONS */
+        .button {
+            display: inline-block;
+            padding: 15px 28px;
+            margin: 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .discord {
+            background: #5865F2;
+            color: white;
+        }
+
+        .discord:hover {
+            background: #4752c4;
+            transform: translateY(-2px);
+        }
+
+        .support {
+            background: #2196f3;
+            color: white;
+        }
+
+        .support:hover {
+            background: #1477c9;
+            transform: translateY(-2px);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 70px 8%;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 35px;
+            margin-bottom: 15px;
+            color: #4da3ff;
+        }
+
+        section > p {
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+
+        /* CARDS */
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #111b2e;
+            border: 1px solid #263653;
+            border-radius: 12px;
+            padding: 30px;
+            width: 280px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #4da3ff;
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        /* SERVER */
+        .server-box {
+            max-width: 600px;
+            margin: auto;
+            background: #111b2e;
+            border: 1px solid #263653;
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .ip {
+            margin: 20px 0;
+            padding: 15px;
+            background: #080f1c;
+            border-radius: 8px;
+            color: #4da3ff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* TICKET */
+        .ticket {
+            background: #0f1f35;
+        }
+
+        .ticket-box {
+            max-width: 700px;
+            margin: auto;
+            background: #111b2e;
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #263653;
+        }
+
+        .ticket-box p {
+            color: #94a3b8;
+            margin: 15px 0 25px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #080f1c;
+            color: #64748b;
+        }
+
+        /* MOBILE */
+        @media (max-width: 700px) {
+            nav {
+                padding: 0 20px;
+            }
+
+            nav div:last-child {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">⚡ TotemVanilla</div>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#server">Server</a>
+            <a href="#support">Support</a>
+            <a href="https://discord.gg/totemvanilla" target="_blank">
+                Discord
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+    <div class="hero" id="home">
+        <div class="hero-content">
+
+            <h1>
+                Totem<span class="blue">Vanilla</span>
+            </h1>
+
+            <p>
+                Een unieke Minecraft Vanilla ervaring.
+                Speel mee met onze community!
+            </p>
+
+            <a
+                class="button discord"
+                href="https://discord.gg/totemvanilla"
+                target="_blank"
+            >
+                💬 Join Discord
+            </a>
+
+            <a
+                class="button support"
+                href="#support"
+            >
+                🎫 Support
+            </a>
+
+        </div>
+    </div>
+
+
+    <!-- ABOUT -->
+    <section>
+        <h2>Waarom TotemVanilla?</h2>
+
+        <p>
+            Een gezellige Minecraft server voor iedereen.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>⛏️ Vanilla</h3>
+                <p>
+                    Een echte Vanilla Minecraft ervaring
+                    zonder onnodige plugins.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>👥 Community</h3>
+                <p>
+                    Maak nieuwe vrienden en speel samen
+                    met onze community.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🛡️ Fair Play</h3>
+                <p>
+                    Een eerlijke server met duidelijke regels
+                    voor iedereen.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- SERVER -->
+    <section id="server">
+
+        <h2>🌐 Server</h2>
+
+        <p>
+            Join TotemVanilla vandaag!
+        </p>
+
+        <div class="server-box">
+
+            <h3>Server IP</h3>
+
+            <div class="ip">
+                play.totemvanilla.nl
+            </div>
+
+            <p>
+                Minecraft Java Edition
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SUPPORT / TICKET -->
+    <section class="ticket" id="support">
+
+        <div class="ticket-box">
+
+            <h2>🎫 Support</h2>
+
+            <p>
+                Heb je een probleem, vraag of wil je hulp?
+                Open een ticket in onze Discord.
+            </p>
+
+            <a
+                class="button support"
+                href="https://discord.gg/totemvanilla"
+                target="_blank"
+            >
+                🎫 Open een Ticket
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 TotemVanilla • All Rights Reserved
+    </footer>
+
+</body>
+</html>
+```
