@@ -1,208 +1,206 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riyad AI</title>
 
-    <title>Riyad AI</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+body {
+    background: #212121;
+    color: white;
+    height: 100vh;
+}
 
-        body {
-            background: #212121;
-            color: white;
-            height: 100vh;
-            overflow: hidden;
-        }
+.app {
+    display: flex;
+    height: 100vh;
+}
 
-        .app {
-            display: flex;
-            height: 100vh;
-        }
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: #171717;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 260px;
-            background: #171717;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-        }
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 10px;
+}
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            padding: 10px;
-        }
+.new-chat {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444;
+    background: #2f2f2f;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
 
-        .new-chat {
-            background: #2f2f2f;
-            border: 1px solid #444;
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 15px;
-            margin-bottom: 20px;
-        }
+.new-chat:hover {
+    background: #3a3a3a;
+}
 
-        .new-chat:hover {
-            background: #3a3a3a;
-        }
+.history {
+    margin-top: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
 
-        .history {
-            flex: 1;
-            overflow-y: auto;
-        }
+.history-title {
+    color: #999;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
 
-        .history-title {
-            color: #999;
-            font-size: 13px;
-            padding: 10px;
-        }
+.history-item {
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #ddd;
+    margin-bottom: 5px;
+}
 
-        .history-item {
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            color: #ddd;
-            margin-bottom: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+.history-item:hover {
+    background: #2a2a2a;
+}
 
-        .history-item:hover {
-            background: #2a2a2a;
-        }
+.bottom {
+    color: #777;
+    font-size: 13px;
+    padding: 10px;
+}
 
-        .sidebar-bottom {
-            color: #aaa;
-            padding: 10px;
-            font-size: 13px;
-        }
+/* MAIN */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
 
-        /* MAIN */
-        .main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
+.topbar {
+    height: 60px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    font-size: 18px;
+    font-weight: bold;
+}
 
-        .topbar {
-            height: 60px;
-            border-bottom: 1px solid #333;
-            display: flex;
-            align-items: center;
-            padding: 0 25px;
-            font-size: 18px;
-            font-weight: bold;
-        }
+.chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px 15%;
+}
 
-        .chat {
-            flex: 1;
-            overflow-y: auto;
-            padding: 30px 15%;
-        }
+.welcome {
+    text-align: center;
+    margin-top: 100px;
+}
 
-        .welcome {
-            text-align: center;
-            margin-top: 100px;
-        }
+.welcome h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
 
-        .welcome h1 {
-            font-size: 38px;
-            margin-bottom: 15px;
-        }
+.welcome p {
+    color: #aaa;
+}
 
-        .welcome p {
-            color: #aaa;
-        }
+/* MESSAGES */
+.message {
+    display: flex;
+    margin-bottom: 25px;
+}
 
-        .message {
-            margin-bottom: 25px;
-            display: flex;
-        }
+.message.user {
+    justify-content: flex-end;
+}
 
-        .message.user {
-            justify-content: flex-end;
-        }
+.bubble {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
 
-        .bubble {
-            max-width: 75%;
-            padding: 14px 18px;
-            border-radius: 16px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
+.user .bubble {
+    background: #303030;
+}
 
-        .message.user .bubble {
-            background: #303030;
-        }
+.ai .bubble {
+    background: transparent;
+}
 
-        .message.ai .bubble {
-            background: transparent;
-        }
+/* INPUT */
+.input-area {
+    padding: 15px 15%;
+    border-top: 1px solid #333;
+}
 
-        /* INPUT */
-        .input-area {
-            padding: 15px 15%;
-            border-top: 1px solid #333;
-        }
+.input-box {
+    display: flex;
+    background: #2f2f2f;
+    border: 1px solid #555;
+    border-radius: 14px;
+    padding: 7px;
+}
 
-        .input-box {
-            display: flex;
-            background: #2f2f2f;
-            border: 1px solid #555;
-            border-radius: 14px;
-            padding: 8px;
-        }
+#messageInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 16px;
+    padding: 12px;
+}
 
-        #messageInput {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 10px;
-            font-size: 16px;
-        }
+#sendButton {
+    width: 45px;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    color: black;
+    font-size: 19px;
+    cursor: pointer;
+}
 
-        #sendButton {
-            width: 45px;
-            border: none;
-            border-radius: 10px;
-            background: white;
-            color: black;
-            cursor: pointer;
-            font-size: 18px;
-        }
+#sendButton:hover {
+    background: #ddd;
+}
 
-        #sendButton:hover {
-            background: #ddd;
-        }
+/* MOBILE */
+@media (max-width: 700px) {
+    .sidebar {
+        display: none;
+    }
 
-        @media (max-width: 700px) {
-            .sidebar {
-                display: none;
-            }
+    .chat {
+        padding: 25px;
+    }
 
-            .chat {
-                padding: 25px;
-            }
-
-            .input-area {
-                padding: 12px;
-            }
-        }
-    </style>
+    .input-area {
+        padding: 10px;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -227,12 +225,11 @@
             <div id="historyList"></div>
         </div>
 
-        <div class="sidebar-bottom">
+        <div class="bottom">
             Riyad AI © 2026
         </div>
 
     </aside>
-
 
     <main class="main">
 
@@ -244,11 +241,10 @@
 
             <div class="welcome" id="welcome">
                 <h1>Hallo 👋</h1>
-                <p>Waar kan ik je mee helpen?</p>
+                <p>Ik ben Riyad AI. Stel me een vraag!</p>
             </div>
 
         </div>
-
 
         <div class="input-area">
 
@@ -257,13 +253,11 @@
                 <input
                     id="messageInput"
                     type="text"
-                    placeholder="Stuur een bericht naar Riyad AI..."
+                    placeholder="Vraag iets aan Riyad AI..."
                     autocomplete="off"
                 >
 
-                <button id="sendButton">
-                    ↑
-                </button>
+                <button id="sendButton">↑</button>
 
             </div>
 
@@ -273,117 +267,183 @@
 
 </div>
 
-
 <script>
 
-    const input = document.getElementById("messageInput");
-    const sendButton = document.getElementById("sendButton");
-    const chat = document.getElementById("chat");
+const input = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
+const chat = document.getElementById("chat");
+const historyList = document.getElementById("historyList");
+
+function addMessage(text, type) {
+
     const welcome = document.getElementById("welcome");
-    const historyList = document.getElementById("historyList");
 
-    let messages = [];
+    if (welcome) {
+        welcome.style.display = "none";
+    }
 
+    const message = document.createElement("div");
+    message.className = "message " + type;
 
-    function addMessage(text, type) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
 
-        if (welcome) {
-            welcome.style.display = "none";
+    bubble.textContent = text;
+
+    message.appendChild(bubble);
+    chat.appendChild(message);
+
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function getAIAnswer(question) {
+
+    const q = question.toLowerCase();
+
+    /* TICKET */
+    if (
+        q.includes("ticket") ||
+        q.includes("ticketcode") ||
+        q.includes("ticket code")
+    ) {
+        return "🎫 Je ticketcode is: RYAD-" +
+               Math.floor(100000 + Math.random() * 900000);
+    }
+
+    /* HALLO */
+    if (
+        q.includes("hallo") ||
+        q.includes("hoi") ||
+        q.includes("hey")
+    ) {
+        return "Hallo! 👋 Leuk dat je Riyad AI gebruikt!";
+    }
+
+    /* WIE BEN JE */
+    if (
+        q.includes("wie ben je") ||
+        q.includes("jouw naam")
+    ) {
+        return "Ik ben Riyad AI 🤖, jouw eigen AI-website.";
+    }
+
+    /* HOE GAAT HET */
+    if (
+        q.includes("hoe gaat het") ||
+        q.includes("hoe gaat het met je")
+    ) {
+        return "Met mij gaat het goed! 😄";
+    }
+
+    /* HELP */
+    if (
+        q.includes("help") ||
+        q.includes("wat kan je")
+    ) {
+        return "Ik kan momenteel onder andere reageren op begroetingen, informatie geven over Riyad AI en ticketcodes maken.";
+    }
+
+    /* TIJD */
+    if (q.includes("tijd")) {
+
+        const now = new Date();
+
+        return "Het is nu " +
+            now.toLocaleTimeString("nl-NL");
+    }
+
+    /* DATUM */
+    if (
+        q.includes("datum") ||
+        q.includes("welke dag")
+    ) {
+
+        const now = new Date();
+
+        return "Vandaag is " +
+            now.toLocaleDateString("nl-NL");
+    }
+
+    /* REKENEN */
+    if (
+        q.startsWith("wat is ") &&
+        /[\d+\-*\/]/.test(q)
+    ) {
+
+        try {
+
+            const expression = q
+                .replace("wat is ", "")
+                .replace(/[^0-9+\-*/(). ]/g, "");
+
+            const result = Function(
+                '"use strict"; return (' + expression + ')'
+            )();
+
+            return "Het antwoord is: " + result;
+
+        } catch {
+
+            return "Ik kon die berekening niet uitvoeren.";
         }
-
-        const message = document.createElement("div");
-
-        message.className = "message " + type;
-
-        const bubble = document.createElement("div");
-
-        bubble.className = "bubble";
-
-        bubble.textContent = text;
-
-        message.appendChild(bubble);
-
-        chat.appendChild(message);
-
-        chat.scrollTop = chat.scrollHeight;
     }
 
+    /* STANDAARD */
+    return "Interessante vraag! 🤖\n\n" +
+           "Ik ben momenteel nog een eenvoudige versie van Riyad AI. " +
+           "Voor echte AI-antwoorden moet mijn website gekoppeld worden aan een AI-model.";
+}
 
-    function sendMessage() {
+function sendMessage() {
 
-        const text = input.value.trim();
+    const text = input.value.trim();
 
-        if (text === "") {
-            return;
-        }
-
-        addMessage(text, "user");
-
-        messages.push({
-            user: text
-        });
-
-        addHistory(text);
-
-        input.value = "";
-
-        // Demo AI antwoord
-        setTimeout(() => {
-
-            let answer =
-                "Ik ben Riyad AI 🤖\n\n" +
-                "Je bericht is ontvangen: \"" +
-                text +
-                "\"\n\n" +
-                "Dit is momenteel een demo. Voor echte AI-antwoorden moet er nog een AI-backend aan gekoppeld worden.";
-
-            addMessage(answer, "ai");
-
-        }, 600);
+    if (text === "") {
+        return;
     }
 
+    addMessage(text, "user");
 
-    function addHistory(text) {
+    const historyItem = document.createElement("div");
 
-        const item = document.createElement("div");
+    historyItem.className = "history-item";
 
-        item.className = "history-item";
+    historyItem.textContent = text;
 
-        item.textContent = text;
+    historyList.prepend(historyItem);
 
-        historyList.prepend(item);
-    }
+    input.value = "";
 
+    setTimeout(() => {
 
-    function newChat() {
+        const answer = getAIAnswer(text);
 
-        chat.innerHTML = "";
+        addMessage(answer, "ai");
 
-        const newWelcome = document.createElement("div");
+    }, 500);
+}
 
-        newWelcome.className = "welcome";
+function newChat() {
 
-        newWelcome.innerHTML = `
+    chat.innerHTML = `
+        <div class="welcome" id="welcome">
             <h1>Nieuwe chat 👋</h1>
             <p>Waar wil je het over hebben?</p>
-        `;
+        </div>
+    `;
 
-        chat.appendChild(newWelcome);
+    input.focus();
+}
 
-        input.focus();
+sendButton.addEventListener("click", sendMessage);
+
+input.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+        sendMessage();
     }
 
-
-    sendButton.addEventListener("click", sendMessage);
-
-
-    input.addEventListener("keydown", function(event) {
-
-        if (event.key === "Enter") {
-            sendMessage();
-        }
-
-    });
+});
 
 </script>
 
