@@ -1,737 +1,1004 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RiyadSchool</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlockWorld - Minecraft Guide</title>
 
-<style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f3f5f8;
-    color: #20252b;
-}
-
-/* TOPBAR */
-.topbar {
-    height: 64px;
-    background: #1769aa;
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0,0,0,.15);
-}
-
-.logo {
-    font-size: 23px;
-    font-weight: bold;
-}
-
-.logo span {
-    opacity: .8;
-}
-
-.profile {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: white;
-    color: #1769aa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-
-/* LAYOUT */
-.layout {
-    display: flex;
-    min-height: calc(100vh - 64px);
-}
-
-/* SIDEBAR */
-.sidebar {
-    width: 230px;
-    background: #ffffff;
-    border-right: 1px solid #ddd;
-    padding: 18px 12px;
-}
-
-.menu-title {
-    color: #888;
-    font-size: 12px;
-    margin: 15px 10px 8px;
-    text-transform: uppercase;
-}
-
-.menu button {
-    width: 100%;
-    border: none;
-    background: transparent;
-    padding: 13px 14px;
-    margin-bottom: 4px;
-    border-radius: 7px;
-    text-align: left;
-    cursor: pointer;
-    font-size: 15px;
-    color: #333;
-}
-
-.menu button:hover,
-.menu button.active {
-    background: #e7f2fb;
-    color: #1769aa;
-}
-
-.icon {
-    width: 25px;
-    display: inline-block;
-}
-
-/* CONTENT */
-.content {
-    flex: 1;
-    padding: 28px;
-    max-width: 1300px;
-}
-
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block;
-}
-
-h1 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-
-.subtitle {
-    color: #777;
-    margin-bottom: 25px;
-}
-
-/* CARDS */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin-bottom: 25px;
-}
-
-.card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    border: 1px solid #e1e4e8;
-    box-shadow: 0 2px 5px rgba(0,0,0,.04);
-}
-
-.card .big {
-    font-size: 28px;
-    font-weight: bold;
-    color: #1769aa;
-    margin-bottom: 5px;
-}
-
-.card p {
-    color: #777;
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
-}
-
-.panel {
-    background: white;
-    border: 1px solid #e1e4e8;
-    border-radius: 10px;
-    padding: 20px;
-}
-
-.panel h2 {
-    font-size: 19px;
-    margin-bottom: 18px;
-}
-
-/* LESSON */
-.lesson {
-    display: flex;
-    align-items: center;
-    padding: 14px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.lesson:last-child {
-    border-bottom: none;
-}
-
-.time {
-    width: 75px;
-    color: #777;
-    font-size: 14px;
-}
-
-.subject {
-    font-weight: bold;
-}
-
-.teacher {
-    color: #777;
-    font-size: 13px;
-    margin-top: 3px;
-}
-
-/* ANNOUNCEMENT */
-.news {
-    padding: 13px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.news:last-child {
-    border: none;
-}
-
-.news strong {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.news small {
-    color: #888;
-}
-
-/* SUBJECTS */
-.subjects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-}
-
-.subject-card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 22px;
-    cursor: pointer;
-    transition: .15s;
-}
-
-.subject-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,.08);
-}
-
-.subject-card h3 {
-    margin-bottom: 8px;
-}
-
-.subject-card p {
-    color: #777;
-}
-
-/* AGENDA */
-.event {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 9px;
-    padding: 18px;
-    margin-bottom: 12px;
-}
-
-.event-date {
-    color: #1769aa;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-/* MESSAGES */
-.message {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 9px;
-    padding: 18px;
-    margin-bottom: 12px;
-}
-
-.message strong {
-    font-size: 16px;
-}
-
-.message p {
-    color: #666;
-    margin-top: 7px;
-}
-
-/* AI */
-.ai-box {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    max-width: 850px;
-    overflow: hidden;
-}
-
-.ai-header {
-    padding: 18px;
-    background: #1769aa;
-    color: white;
-    font-weight: bold;
-}
-
-.chat {
-    height: 420px;
-    padding: 20px;
-    overflow-y: auto;
-}
-
-.msg {
-    margin-bottom: 15px;
-    padding: 12px 15px;
-    border-radius: 10px;
-    max-width: 75%;
-}
-
-.bot {
-    background: #eef4f8;
-}
-
-.user {
-    background: #1769aa;
-    color: white;
-    margin-left: auto;
-}
-
-.ai-input {
-    display: flex;
-    border-top: 1px solid #ddd;
-}
-
-.ai-input input {
-    flex: 1;
-    border: none;
-    padding: 16px;
-    font-size: 15px;
-    outline: none;
-}
-
-.ai-input button {
-    width: 100px;
-    border: none;
-    background: #1769aa;
-    color: white;
-    cursor: pointer;
-}
-
-/* MOBILE */
-@media(max-width: 900px) {
-    .sidebar {
-        width: 70px;
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .sidebar .menu button {
-        font-size: 0;
-        text-align: center;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .icon {
-        font-size: 19px;
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(rgba(12, 20, 15, 0.88), rgba(12, 20, 15, 0.96)),
+        radial-gradient(circle at top left, #4a6d3d, transparent 35%);
+      color: #f5f5f5;
+      min-height: 100vh;
     }
 
-    .cards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .subjects {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media(max-width: 600px) {
-    .content {
-        padding: 16px;
-    }
-
-    .cards {
-        grid-template-columns: 1fr;
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(20, 29, 22, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px;
     }
 
     .logo {
-        font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
-}
-</style>
+
+    .logo-box {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #4f7e37, #2f4f2c);
+      border: 3px solid #7bbd4d;
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,0.25);
+      font-size: 22px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #8ee55e;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 70px 7%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      right: -100px;
+      top: 20px;
+      background: radial-gradient(circle, rgba(120, 255, 90, 0.15), transparent 65%);
+      border-radius: 50%;
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid #6f9d4e;
+      color: #98e66d;
+      background: rgba(64, 98, 48, 0.2);
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(44px, 8vw, 88px);
+      line-height: 0.95;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      text-shadow:
+        4px 4px 0 #1e2b1f,
+        8px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    .hero h1 span {
+      color: #79c94b;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #cfd5d0;
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 18px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #6fbd45;
+      color: #10200d;
+      box-shadow: 0 5px 0 #437c28;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #437c28;
+    }
+
+    .btn-dark {
+      background: #232d25;
+      color: white;
+      border: 1px solid #405444;
+    }
+
+    .btn-dark:hover {
+      background: #2c3a2f;
+    }
+
+    .hero-card {
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(145deg, #1d271f, #111713);
+      border: 1px solid #354538;
+      padding: 24px;
+      border-radius: 18px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.38);
+    }
+
+    .pixel-scene {
+      height: 360px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background:
+        linear-gradient(#70b7dd 0 55%, #7dbc4a 55% 70%, #6e4c2f 70% 100%);
+      image-rendering: pixelated;
+    }
+
+    .sun {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      background: #ffe86b;
+      right: 38px;
+      top: 36px;
+      box-shadow: 0 0 25px rgba(255,232,107,0.55);
+    }
+
+    .mountain {
+      position: absolute;
+      width: 180px;
+      height: 120px;
+      left: 30px;
+      bottom: 108px;
+      background: #6c7f67;
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .tree {
+      position: absolute;
+      left: 210px;
+      bottom: 80px;
+      width: 46px;
+      height: 130px;
+      background: #704b2c;
+    }
+
+    .tree::before {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 100px;
+      left: -32px;
+      top: -40px;
+      background: #3f7a37;
+      box-shadow:
+        20px 15px 0 #3c7134,
+        -18px 18px 0 #4d8b3d;
+    }
+
+    .creeper {
+      position: absolute;
+      right: 95px;
+      bottom: 70px;
+      width: 56px;
+      height: 115px;
+      background: #66b84b;
+      box-shadow:
+        inset 0 0 0 5px rgba(0,0,0,0.08);
+    }
+
+    .creeper::before {
+      content: "▣ ▣";
+      position: absolute;
+      top: 17px;
+      left: 9px;
+      color: #111;
+      font-size: 18px;
+      letter-spacing: 3px;
+    }
+
+    .creeper::after {
+      content: "▼";
+      position: absolute;
+      top: 42px;
+      left: 17px;
+      color: #111;
+      font-size: 25px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 80px 7%;
+    }
+
+    .section-title {
+      margin-bottom: 32px;
+    }
+
+    .section-title span {
+      color: #83d253;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    .section-title h2 {
+      font-size: clamp(32px, 5vw, 52px);
+      margin-top: 8px;
+    }
+
+    .section-title p {
+      color: #aeb8af;
+      max-width: 700px;
+      margin-top: 10px;
+      line-height: 1.7;
+    }
+
+    /* SEARCH */
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+      max-width: 650px;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: #172018;
+      color: white;
+      border: 1px solid #334536;
+      border-radius: 8px;
+      padding: 14px 16px;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .search-box input:focus {
+      border-color: #6db749;
+    }
+
+    /* CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: #172018;
+      border: 1px solid #2f3f32;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: #5f8d46;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+    }
+
+    .card-image {
+      height: 180px;
+      display: grid;
+      place-items: center;
+      font-size: 72px;
+      background:
+        linear-gradient(145deg, rgba(74,109,61,0.6), rgba(30,44,31,0.6)),
+        #253129;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-content h3 {
+      margin-bottom: 8px;
+      font-size: 21px;
+    }
+
+    .card-content p {
+      color: #aeb7af;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 6px 9px;
+      border-radius: 5px;
+      background: #223223;
+      border: 1px solid #3d5f3f;
+      color: #8fd167;
+      font-size: 12px;
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 24px;
+      background: #152018;
+      border: 1px solid #2d3d30;
+      border-radius: 12px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 34px;
+      color: #82d354;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      color: #a8b2aa;
+      font-size: 14px;
+    }
+
+    /* TABLE */
+    .table-wrap {
+      overflow-x: auto;
+      background: #172018;
+      border: 1px solid #2e4132;
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+    }
+
+    th, td {
+      padding: 16px 18px;
+      text-align: left;
+      border-bottom: 1px solid #2a392d;
+    }
+
+    th {
+      color: #8ed060;
+      background: #1d291f;
+    }
+
+    td {
+      color: #d7dbd7;
+    }
+
+    /* FAQ */
+    .faq-item {
+      margin-bottom: 12px;
+      border: 1px solid #304033;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #172018;
+    }
+
+    .faq-question {
+      padding: 17px 18px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.3s;
+      color: #b4bdb5;
+      padding: 0 18px;
+      line-height: 1.6;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 180px;
+      padding: 0 18px 18px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 35px 7%;
+      border-top: 1px solid #27342a;
+      color: #89958b;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* MOBILE */
+    @media (max-width: 950px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 650px) {
+      nav {
+        padding: 12px 16px;
+      }
+
+      .hero, section {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+
+      .grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .pixel-scene {
+        height: 280px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- TOPBAR -->
-<header class="topbar">
-    <div class="logo">🏫 RiyadSchool</div>
-
-    <div class="profile">
-        <span>Leerling</span>
-        <div class="avatar">R</div>
-    </div>
-</header>
-
-<div class="layout">
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-
-    <div class="menu">
-
-        <div class="menu-title">Menu</div>
-
-        <button class="active" onclick="showPage('home', this)">
-            <span class="icon">🏠</span> Startpagina
-        </button>
-
-        <button onclick="showPage('vakken', this)">
-            <span class="icon">📚</span> Mijn vakken
-        </button>
-
-        <button onclick="showPage('agenda', this)">
-            <span class="icon">📅</span> Agenda
-        </button>
-
-        <button onclick="showPage('berichten', this)">
-            <span class="icon">✉️</span> Berichten
-        </button>
-
-        <button onclick="showPage('ai', this)">
-            <span class="icon">🤖</span> RiyadGPT
-        </button>
-
-        <div class="menu-title">Account</div>
-
-        <button onclick="alert('Instellingen komen binnenkort!')">
-            <span class="icon">⚙️</span> Instellingen
-        </button>
-
-        <button onclick="alert('Je bent uitgelogd!')">
-            <span class="icon">🚪</span> Uitloggen
-        </button>
-
-    </div>
-</aside>
-
-
-<!-- CONTENT -->
-<main class="content">
-
-<!-- HOME -->
-<section id="home" class="page active">
-
-    <h1>Welkom terug 👋</h1>
-    <p class="subtitle">Dit is jouw RiyadSchool-startpagina.</p>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="big">6</div>
-            <p>Vakken</p>
-        </div>
-
-        <div class="card">
-            <div class="big">3</div>
-            <p>Nieuwe berichten</p>
-        </div>
-
-        <div class="card">
-            <div class="big">2</div>
-            <p>Toetsen deze week</p>
-        </div>
-
-        <div class="card">
-            <div class="big">8,4</div>
-            <p>Gemiddelde</p>
-        </div>
-
+  <nav>
+    <div class="logo">
+      <div class="logo-box">⛏️</div>
+      BlockWorld
     </div>
 
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#biomes">Biomes</a>
+      <a href="#mobs">Mobs</a>
+      <a href="#items">Items</a>
+      <a href="#crafting">Crafting</a>
+      <a href="#faq">FAQ</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <div class="badge">⛏️ Minecraft fan guide</div>
+
+      <h1>
+        Ontdek de wereld van
+        <span>Minecraft</span>
+      </h1>
+
+      <p>
+        Leer alles over biomes, mobs, ores, crafting, survival,
+        bouwen en meer. Een uitgebreide Minecraft-website met
+        handige informatie voor beginners en ervaren spelers.
+      </p>
+
+      <div class="hero-buttons">
+        <a class="btn btn-primary" href="#biomes">Start ontdekken</a>
+        <a class="btn btn-dark" href="#crafting">Bekijk crafting</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="pixel-scene">
+        <div class="sun"></div>
+        <div class="mountain"></div>
+        <div class="tree"></div>
+        <div class="creeper"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section>
+    <div class="stats">
+      <div class="stat">
+        <strong>70+</strong>
+        <span>Biomes</span>
+      </div>
+
+      <div class="stat">
+        <strong>80+</strong>
+        <span>Mobs</span>
+      </div>
+
+      <div class="stat">
+        <strong>1000+</strong>
+        <span>Items & blokken</span>
+      </div>
+
+      <div class="stat">
+        <strong>∞</strong>
+        <span>Mogelijkheden</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIOMES -->
+  <section id="biomes">
+    <div class="section-title">
+      <span>Werelden</span>
+      <h2>Populaire biomes</h2>
+      <p>
+        Elke biome heeft zijn eigen planten, mobs, terrein en grondstoffen.
+      </p>
+    </div>
+
+    <div class="search-box">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Zoek bijvoorbeeld: desert, forest, nether..."
+        oninput="filterCards()"
+      />
+    </div>
+
+    <div class="grid" id="biomeGrid">
+
+      <div class="card searchable" data-name="forest bos bomen oak">
+        <div class="card-image">🌲</div>
+        <div class="card-content">
+          <h3>Forest</h3>
+          <p>
+            Een groene biome met veel bomen, dieren en hout.
+            Perfect als startlocatie voor survival.
+          </p>
+          <span class="tag">Overworld</span>
+        </div>
+      </div>
+
+      <div class="card searchable" data-name="desert woestijn sand cactus">
+        <div class="card-image">🏜️</div>
+        <div class="card-content">
+          <h3>Desert</h3>
+          <p>
+            Grote vlaktes vol zand en cactussen. Je kunt hier dorpen
+            en desert temples vinden.
+          </p>
+          <span class="tag">Droog</span>
+        </div>
+      </div>
+
+      <div class="card searchable" data-name="snow snowy ice taiga sneeuw">
+        <div class="card-image">❄️</div>
+        <div class="card-content">
+          <h3>Snowy Taiga</h3>
+          <p>
+            Een koude biome met sneeuw, spruce trees, wolven
+            en soms iglo's.
+          </p>
+          <span class="tag">Koud</span>
+        </div>
+      </div>
+
+      <div class="card searchable" data-name="jungle bamboo panda">
+        <div class="card-image">🌴</div>
+        <div class="card-content">
+          <h3>Jungle</h3>
+          <p>
+            Dichte begroeiing, jungle trees, bamboo, cacao en pandas.
+          </p>
+          <span class="tag">Tropisch</span>
+        </div>
+      </div>
+
+      <div class="card searchable" data-name="ocean zee water coral">
+        <div class="card-image">🌊</div>
+        <div class="card-content">
+          <h3>Ocean</h3>
+          <p>
+            Grote watergebieden met vissen, monumenten,
+            scheepswrakken en koraalriffen.
+          </p>
+          <span class="tag">Water</span>
+        </div>
+      </div>
+
+      <div class="card searchable" data-name="nether lava hell crimson warped">
+        <div class="card-image">🔥</div>
+        <div class="card-content">
+          <h3>Nether</h3>
+          <p>
+            Een gevaarlijke dimensie vol lava, fortresses,
+            piglins en bijzondere materialen.
+          </p>
+          <span class="tag">Dimensie</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MOBS -->
+  <section id="mobs">
+    <div class="section-title">
+      <span>Creatures</span>
+      <h2>Mobs</h2>
+      <p>
+        Minecraft bevat vriendelijke, neutrale en vijandige mobs.
+      </p>
+    </div>
 
     <div class="grid">
 
-        <div class="panel">
-
-            <h2>📅 Vandaag</h2>
-
-            <div class="lesson">
-                <div class="time">08:30</div>
-                <div>
-                    <div class="subject">Wiskunde</div>
-                    <div class="teacher">Dhr. Janssens · Lokaal 204</div>
-                </div>
-            </div>
-
-            <div class="lesson">
-                <div class="time">09:30</div>
-                <div>
-                    <div class="subject">Nederlands</div>
-                    <div class="teacher">Mevr. Peeters · Lokaal 112</div>
-                </div>
-            </div>
-
-            <div class="lesson">
-                <div class="time">10:45</div>
-                <div>
-                    <div class="subject">Engels</div>
-                    <div class="teacher">Dhr. Smith · Lokaal 301</div>
-                </div>
-            </div>
-
-            <div class="lesson">
-                <div class="time">13:15</div>
-                <div>
-                    <div class="subject">Geschiedenis</div>
-                    <div class="teacher">Mevr. De Smet · Lokaal 108</div>
-                </div>
-            </div>
-
+      <div class="card">
+        <div class="card-image">🧟</div>
+        <div class="card-content">
+          <h3>Zombie</h3>
+          <p>
+            Verschijnt vooral 's nachts en valt spelers aan.
+            Bescherm jezelf met armor en wapens.
+          </p>
+          <span class="tag">Hostile</span>
         </div>
+      </div>
 
-
-        <div class="panel">
-
-            <h2>📢 Mededelingen</h2>
-
-            <div class="news">
-                <strong>Toets wiskunde</strong>
-                <small>Vrijdag om 10:00</small>
-            </div>
-
-            <div class="news">
-                <strong>Schoolfeest</strong>
-                <small>Volgende week vrijdag</small>
-            </div>
-
-            <div class="news">
-                <strong>Nieuwe opdracht</strong>
-                <small>Nederlands · vandaag</small>
-            </div>
-
+      <div class="card">
+        <div class="card-image">💥</div>
+        <div class="card-content">
+          <h3>Creeper</h3>
+          <p>
+            Een iconische groene mob die stil dichtbij komt
+            en kan ontploffen.
+          </p>
+          <span class="tag">Hostile</span>
         </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">🐺</div>
+        <div class="card-content">
+          <h3>Wolf</h3>
+          <p>
+            Wolven kunnen getemd worden en helpen je tijdens gevechten.
+          </p>
+          <span class="tag">Neutral</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">🐝</div>
+        <div class="card-content">
+          <h3>Bee</h3>
+          <p>
+            Bijen leven rond nesten en helpen bloemen bestuiven.
+          </p>
+          <span class="tag">Neutral</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">🐼</div>
+        <div class="card-content">
+          <h3>Panda</h3>
+          <p>
+            Panda's vind je vooral in bamboo jungles.
+          </p>
+          <span class="tag">Passive</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">🐉</div>
+        <div class="card-content">
+          <h3>Ender Dragon</h3>
+          <p>
+            De bekendste eindbaas van Minecraft en te vinden in The End.
+          </p>
+          <span class="tag">Boss</span>
+        </div>
+      </div>
 
     </div>
+  </section>
 
-</section>
-
-
-<!-- VAKKEN -->
-<section id="vakken" class="page">
-
-    <h1>Mijn vakken 📚</h1>
-    <p class="subtitle">Bekijk je vakken en informatie.</p>
-
-    <div class="subjects">
-
-        <div class="subject-card">
-            <h3>📐 Wiskunde</h3>
-            <p>Dhr. Janssens</p>
-        </div>
-
-        <div class="subject-card">
-            <h3>🇳🇱 Nederlands</h3>
-            <p>Mevr. Peeters</p>
-        </div>
-
-        <div class="subject-card">
-            <h3>🇬🇧 Engels</h3>
-            <p>Dhr. Smith</p>
-        </div>
-
-        <div class="subject-card">
-            <h3>🌍 Aardrijkskunde</h3>
-            <p>Mevr. Vermeulen</p>
-        </div>
-
-        <div class="subject-card">
-            <h3>🏛️ Geschiedenis</h3>
-            <p>Mevr. De Smet</p>
-        </div>
-
-        <div class="subject-card">
-            <h3>🧪 Wetenschappen</h3>
-            <p>Dhr. Willems</p>
-        </div>
-
+  <!-- ITEMS -->
+  <section id="items">
+    <div class="section-title">
+      <span>Resources</span>
+      <h2>Belangrijke materialen</h2>
+      <p>
+        Deze materialen gebruik je voor tools, armor, bouwen en crafting.
+      </p>
     </div>
 
-</section>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Materiaal</th>
+            <th>Waar te vinden</th>
+            <th>Gebruik</th>
+            <th>Zeldzaamheid</th>
+          </tr>
+        </thead>
 
+        <tbody>
+          <tr>
+            <td>🪵 Wood</td>
+            <td>Bomen</td>
+            <td>Tools, planks, crafting table</td>
+            <td>Veel voorkomend</td>
+          </tr>
 
-<!-- AGENDA -->
-<section id="agenda" class="page">
+          <tr>
+            <td>🪨 Coal</td>
+            <td>Grotten en bergen</td>
+            <td>Torches en fuel</td>
+            <td>Veel voorkomend</td>
+          </tr>
 
-    <h1>Agenda 📅</h1>
-    <p class="subtitle">Je komende activiteiten.</p>
+          <tr>
+            <td>⛓️ Iron</td>
+            <td>Onder de grond</td>
+            <td>Armor, tools, buckets</td>
+            <td>Normaal</td>
+          </tr>
 
-    <div class="event">
-        <div class="event-date">MAANDAG</div>
-        <strong>Toets Nederlands</strong>
-        <p>Hoofdstuk 4 · 10:00</p>
+          <tr>
+            <td>🟨 Gold</td>
+            <td>Grotten en Nether</td>
+            <td>Items, rails, trading</td>
+            <td>Minder vaak</td>
+          </tr>
+
+          <tr>
+            <td>💎 Diamond</td>
+            <td>Diep onder de grond</td>
+            <td>Sterke tools en armor</td>
+            <td>Zeldzaam</td>
+          </tr>
+
+          <tr>
+            <td>⬛ Netherite</td>
+            <td>Nether</td>
+            <td>Top-tier gear upgrades</td>
+            <td>Zeer zeldzaam</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CRAFTING -->
+  <section id="crafting">
+    <div class="section-title">
+      <span>Crafting</span>
+      <h2>Handige recipes</h2>
+      <p>
+        Een paar van de belangrijkste items die je vroeg in een survivalwereld nodig hebt.
+      </p>
     </div>
 
-    <div class="event">
-        <div class="event-date">WOENSDAG</div>
-        <strong>Taak wiskunde</strong>
-        <p>Oefeningen 12 t/m 20</p>
-    </div>
+    <div class="grid">
 
-    <div class="event">
-        <div class="event-date">VRIJDAG</div>
-        <strong>Toets wiskunde</strong>
-        <p>Hoofdstuk 6 · 09:00</p>
-    </div>
-
-</section>
-
-
-<!-- BERICHTEN -->
-<section id="berichten" class="page">
-
-    <h1>Berichten ✉️</h1>
-    <p class="subtitle">Je berichten.</p>
-
-    <div class="message">
-        <strong>Mevr. Peeters</strong>
-        <p>Vergeet je opdracht voor Nederlands niet.</p>
-    </div>
-
-    <div class="message">
-        <strong>Dhr. Janssens</strong>
-        <p>De toets wiskunde gaat vrijdag door.</p>
-    </div>
-
-    <div class="message">
-        <strong>Schooladministratie</strong>
-        <p>Er is een nieuwe mededeling beschikbaar.</p>
-    </div>
-
-</section>
-
-
-<!-- RIYADGPT -->
-<section id="ai" class="page">
-
-    <h1>RiyadGPT 🤖</h1>
-    <p class="subtitle">Je digitale studie-assistent.</p>
-
-    <div class="ai-box">
-
-        <div class="ai-header">
-            🤖 RiyadGPT
+      <div class="card">
+        <div class="card-image">🛠️</div>
+        <div class="card-content">
+          <h3>Crafting Table</h3>
+          <p>
+            Gebruik 4 wooden planks. Hiermee krijg je toegang tot
+            een crafting grid van 3x3.
+          </p>
         </div>
+      </div>
 
-        <div class="chat" id="chat">
-
-            <div class="msg bot">
-                Hallo! 👋 Ik ben RiyadGPT. Waarmee kan ik je helpen met school?
-            </div>
-
+      <div class="card">
+        <div class="card-image">🔥</div>
+        <div class="card-content">
+          <h3>Furnace</h3>
+          <p>
+            Maak een furnace met cobblestone. Gebruik hem om ores,
+            eten en andere materialen te smelten.
+          </p>
         </div>
+      </div>
 
-        <div class="ai-input">
-
-            <input
-                id="aiInput"
-                placeholder="Stel een vraag..."
-                onkeydown="if(event.key==='Enter') sendAI()"
-            >
-
-            <button onclick="sendAI()">Stuur</button>
-
+      <div class="card">
+        <div class="card-image">🛏️</div>
+        <div class="card-content">
+          <h3>Bed</h3>
+          <p>
+            Een bed gebruikt wool en planks. Hiermee kun je slapen
+            en je spawnpoint instellen.
+          </p>
         </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">🛡️</div>
+        <div class="card-content">
+          <h3>Shield</h3>
+          <p>
+            Een shield kan veel aanvallen blokkeren en is heel handig
+            tijdens combat.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">🏹</div>
+        <div class="card-content">
+          <h3>Bow</h3>
+          <p>
+            Gebruik sticks en string om op afstand tegen mobs te vechten.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">⛏️</div>
+        <div class="card-content">
+          <h3>Pickaxe</h3>
+          <p>
+            Essentieel om stone, ores en andere blokken sneller te minen.
+          </p>
+        </div>
+      </div>
 
     </div>
+  </section>
 
-</section>
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-title">
+      <span>Help</span>
+      <h2>Veelgestelde vragen</h2>
+    </div>
 
-</main>
-</div>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Hoe overleef ik mijn eerste nacht?
+        <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Verzamel hout, maak tools, zoek voedsel en bouw vóór de nacht
+        een eenvoudige schuilplaats met licht.
+      </div>
+    </div>
 
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Waar vind je diamonds?
+        <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Diamonds vind je diep onder de grond. Verken grotten of mine
+        op lage hoogtes en neem genoeg eten, torches en een iron pickaxe mee.
+      </div>
+    </div>
 
-<script>
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Wat heb je nodig om naar de Nether te gaan?
+        <span>+</span>
+      </div>
+      <div class="faq-answer">
+        Je hebt een Nether Portal nodig van obsidian en een manier om
+        het portal te activeren, zoals flint and steel.
+      </div>
+    </div>
+  </section>
 
-/* PAGINA WISSELEN */
+  <footer>
+    <div>⛏️ BlockWorld Minecraft Guide</div>
+    <div>Fan-made website · Niet officieel verbonden aan Mojang of Microsoft</div>
+  </footer>
 
-function showPage(pageId, button) {
+  <script>
+    function filterCards() {
+      const input = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
 
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
+      const cards = document.querySelectorAll(".searchable");
 
-    document.getElementById(pageId).classList.add("active");
+      cards.forEach(card => {
+        const name = card.dataset.name.toLowerCase();
 
-    document.querySelectorAll(".menu button").forEach(btn => {
-        btn.classList.remove("active");
-    });
+        if (name.includes(input)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
 
-    button.classList.add("active");
-}
+    function toggleFaq(element) {
+      const item = element.parentElement;
 
+      document.querySelectorAll(".faq-item").forEach(faq => {
+        if (faq !== item) {
+          faq.classList.remove("open");
+        }
+      });
 
-/* DEMO AI */
-
-function sendAI() {
-
-    const input = document.getElementById("aiInput");
-    const chat = document.getElementById("chat");
-
-    const text = input.value.trim();
-
-    if (!text) return;
-
-    const userMessage = document.createElement("div");
-    userMessage.className = "msg user";
-    userMessage.textContent = text;
-
-    chat.appendChild(userMessage);
-
-    input.value = "";
-
-    setTimeout(() => {
-
-        const botMessage = document.createElement("div");
-        botMessage.className = "msg bot";
-
-        botMessage.textContent =
-            "Ik ben momenteel de demo-versie van RiyadGPT. Je kunt later een AI-backend koppelen.";
-
-        chat.appendChild(botMessage);
-
-        chat.scrollTop = chat.scrollHeight;
-
-    }, 700);
-
-}
-
-</script>
+      item.classList.toggle("open");
+    }
+  </script>
 
 </body>
 </html>
