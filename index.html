@@ -1,231 +1,205 @@
-```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TotemVanilla | Minecraft</title>
+    <title>Riyad AI</title>
 
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #0b1220;
+            background: #212121;
             color: white;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        /* NAVBAR */
-        nav {
-            height: 70px;
-            background: #111b2e;
+        .app {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 8%;
-            border-bottom: 1px solid #263653;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: #171717;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
-            color: #4da3ff;
+            margin-bottom: 20px;
+            padding: 10px;
         }
 
-        nav a {
-            color: #dbeafe;
-            text-decoration: none;
-            margin-left: 25px;
-            font-weight: bold;
+        .new-chat {
+            background: #2f2f2f;
+            border: 1px solid #444;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-bottom: 20px;
         }
 
-        nav a:hover {
-            color: #4da3ff;
+        .new-chat:hover {
+            background: #3a3a3a;
         }
 
-        /* HERO */
-        .hero {
-            min-height: 600px;
+        .history {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .history-title {
+            color: #999;
+            font-size: 13px;
+            padding: 10px;
+        }
+
+        .history-item {
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #ddd;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .history-item:hover {
+            background: #2a2a2a;
+        }
+
+        .sidebar-bottom {
+            color: #aaa;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        /* MAIN */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            height: 60px;
+            border-bottom: 1px solid #333;
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px 20px;
-
-            background:
-                linear-gradient(#08111ddd, #08111ddd),
-                url("https://images.unsplash.com/photo-1607988795691-3d0147b43231?auto=format&fit=crop&w=1800&q=80");
-
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 65px;
-            margin-bottom: 15px;
-            text-shadow: 4px 4px #000;
-        }
-
-        .blue {
-            color: #4da3ff;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: #cbd5e1;
-            margin-bottom: 30px;
-        }
-
-        /* BUTTONS */
-        .button {
-            display: inline-block;
-            padding: 15px 28px;
-            margin: 8px;
-            border-radius: 8px;
-            text-decoration: none;
+            padding: 0 25px;
+            font-size: 18px;
             font-weight: bold;
-            transition: 0.2s;
         }
 
-        .discord {
-            background: #5865F2;
-            color: white;
+        .chat {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 15%;
         }
 
-        .discord:hover {
-            background: #4752c4;
-            transform: translateY(-2px);
-        }
-
-        .support {
-            background: #2196f3;
-            color: white;
-        }
-
-        .support:hover {
-            background: #1477c9;
-            transform: translateY(-2px);
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 70px 8%;
+        .welcome {
             text-align: center;
+            margin-top: 100px;
         }
 
-        section h2 {
-            font-size: 35px;
+        .welcome h1 {
+            font-size: 38px;
             margin-bottom: 15px;
-            color: #4da3ff;
         }
 
-        section > p {
-            color: #94a3b8;
-            margin-bottom: 40px;
+        .welcome p {
+            color: #aaa;
         }
 
-        /* CARDS */
-        .cards {
+        .message {
+            margin-bottom: 25px;
             display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
         }
 
-        .card {
-            background: #111b2e;
-            border: 1px solid #263653;
-            border-radius: 12px;
-            padding: 30px;
-            width: 280px;
-            transition: 0.2s;
+        .message.user {
+            justify-content: flex-end;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #4da3ff;
-        }
-
-        .card h3 {
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            color: #94a3b8;
+        .bubble {
+            max-width: 75%;
+            padding: 14px 18px;
+            border-radius: 16px;
             line-height: 1.5;
+            white-space: pre-wrap;
         }
 
-        /* SERVER */
-        .server-box {
-            max-width: 600px;
-            margin: auto;
-            background: #111b2e;
-            border: 1px solid #263653;
-            border-radius: 12px;
-            padding: 30px;
+        .message.user .bubble {
+            background: #303030;
         }
 
-        .ip {
-            margin: 20px 0;
-            padding: 15px;
-            background: #080f1c;
-            border-radius: 8px;
-            color: #4da3ff;
-            font-size: 20px;
-            font-weight: bold;
+        .message.ai .bubble {
+            background: transparent;
         }
 
-        /* TICKET */
-        .ticket {
-            background: #0f1f35;
+        /* INPUT */
+        .input-area {
+            padding: 15px 15%;
+            border-top: 1px solid #333;
         }
 
-        .ticket-box {
-            max-width: 700px;
-            margin: auto;
-            background: #111b2e;
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid #263653;
+        .input-box {
+            display: flex;
+            background: #2f2f2f;
+            border: 1px solid #555;
+            border-radius: 14px;
+            padding: 8px;
         }
 
-        .ticket-box p {
-            color: #94a3b8;
-            margin: 15px 0 25px;
+        #messageInput {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
         }
 
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #080f1c;
-            color: #64748b;
+        #sendButton {
+            width: 45px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: black;
+            cursor: pointer;
+            font-size: 18px;
         }
 
-        /* MOBILE */
+        #sendButton:hover {
+            background: #ddd;
+        }
+
         @media (max-width: 700px) {
-            nav {
-                padding: 0 20px;
-            }
-
-            nav div:last-child {
+            .sidebar {
                 display: none;
             }
 
-            .hero h1 {
-                font-size: 42px;
+            .chat {
+                padding: 25px;
+            }
+
+            .input-area {
+                padding: 12px;
             }
         }
     </style>
@@ -233,147 +207,185 @@
 
 <body>
 
-    <!-- NAVBAR -->
-    <nav>
-        <div class="logo">⚡ TotemVanilla</div>
+<div class="app">
 
-        <div>
-            <a href="#home">Home</a>
-            <a href="#server">Server</a>
-            <a href="#support">Support</a>
-            <a href="https://discord.gg/totemvanilla" target="_blank">
-                Discord
-            </a>
+    <aside class="sidebar">
+
+        <div class="logo">
+            🤖 Riyad AI
         </div>
-    </nav>
 
+        <button class="new-chat" onclick="newChat()">
+            + Nieuwe chat
+        </button>
 
-    <!-- HERO -->
-    <div class="hero" id="home">
-        <div class="hero-content">
-
-            <h1>
-                Totem<span class="blue">Vanilla</span>
-            </h1>
-
-            <p>
-                Een unieke Minecraft Vanilla ervaring.
-                Speel mee met onze community!
-            </p>
-
-            <a
-                class="button discord"
-                href="https://discord.gg/totemvanilla"
-                target="_blank"
-            >
-                💬 Join Discord
-            </a>
-
-            <a
-                class="button support"
-                href="#support"
-            >
-                🎫 Support
-            </a>
-
-        </div>
-    </div>
-
-
-    <!-- ABOUT -->
-    <section>
-        <h2>Waarom TotemVanilla?</h2>
-
-        <p>
-            Een gezellige Minecraft server voor iedereen.
-        </p>
-
-        <div class="cards">
-
-            <div class="card">
-                <h3>⛏️ Vanilla</h3>
-                <p>
-                    Een echte Vanilla Minecraft ervaring
-                    zonder onnodige plugins.
-                </p>
+        <div class="history">
+            <div class="history-title">
+                Recente chats
             </div>
 
-            <div class="card">
-                <h3>👥 Community</h3>
-                <p>
-                    Maak nieuwe vrienden en speel samen
-                    met onze community.
-                </p>
-            </div>
+            <div id="historyList"></div>
+        </div>
 
-            <div class="card">
-                <h3>🛡️ Fair Play</h3>
-                <p>
-                    Een eerlijke server met duidelijke regels
-                    voor iedereen.
-                </p>
+        <div class="sidebar-bottom">
+            Riyad AI © 2026
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="topbar">
+            Riyad AI
+        </div>
+
+        <div class="chat" id="chat">
+
+            <div class="welcome" id="welcome">
+                <h1>Hallo 👋</h1>
+                <p>Waar kan ik je mee helpen?</p>
             </div>
 
         </div>
-    </section>
 
 
-    <!-- SERVER -->
-    <section id="server">
+        <div class="input-area">
 
-        <h2>🌐 Server</h2>
+            <div class="input-box">
 
-        <p>
-            Join TotemVanilla vandaag!
-        </p>
+                <input
+                    id="messageInput"
+                    type="text"
+                    placeholder="Stuur een bericht naar Riyad AI..."
+                    autocomplete="off"
+                >
 
-        <div class="server-box">
+                <button id="sendButton">
+                    ↑
+                </button>
 
-            <h3>Server IP</h3>
-
-            <div class="ip">
-                play.totemvanilla.nl
             </div>
 
-            <p>
-                Minecraft Java Edition
-            </p>
-
         </div>
 
-    </section>
+    </main>
+
+</div>
 
 
-    <!-- SUPPORT / TICKET -->
-    <section class="ticket" id="support">
+<script>
 
-        <div class="ticket-box">
+    const input = document.getElementById("messageInput");
+    const sendButton = document.getElementById("sendButton");
+    const chat = document.getElementById("chat");
+    const welcome = document.getElementById("welcome");
+    const historyList = document.getElementById("historyList");
 
-            <h2>🎫 Support</h2>
-
-            <p>
-                Heb je een probleem, vraag of wil je hulp?
-                Open een ticket in onze Discord.
-            </p>
-
-            <a
-                class="button support"
-                href="https://discord.gg/totemvanilla"
-                target="_blank"
-            >
-                🎫 Open een Ticket
-            </a>
-
-        </div>
-
-    </section>
+    let messages = [];
 
 
-    <!-- FOOTER -->
-    <footer>
-        © 2026 TotemVanilla • All Rights Reserved
-    </footer>
+    function addMessage(text, type) {
+
+        if (welcome) {
+            welcome.style.display = "none";
+        }
+
+        const message = document.createElement("div");
+
+        message.className = "message " + type;
+
+        const bubble = document.createElement("div");
+
+        bubble.className = "bubble";
+
+        bubble.textContent = text;
+
+        message.appendChild(bubble);
+
+        chat.appendChild(message);
+
+        chat.scrollTop = chat.scrollHeight;
+    }
+
+
+    function sendMessage() {
+
+        const text = input.value.trim();
+
+        if (text === "") {
+            return;
+        }
+
+        addMessage(text, "user");
+
+        messages.push({
+            user: text
+        });
+
+        addHistory(text);
+
+        input.value = "";
+
+        // Demo AI antwoord
+        setTimeout(() => {
+
+            let answer =
+                "Ik ben Riyad AI 🤖\n\n" +
+                "Je bericht is ontvangen: \"" +
+                text +
+                "\"\n\n" +
+                "Dit is momenteel een demo. Voor echte AI-antwoorden moet er nog een AI-backend aan gekoppeld worden.";
+
+            addMessage(answer, "ai");
+
+        }, 600);
+    }
+
+
+    function addHistory(text) {
+
+        const item = document.createElement("div");
+
+        item.className = "history-item";
+
+        item.textContent = text;
+
+        historyList.prepend(item);
+    }
+
+
+    function newChat() {
+
+        chat.innerHTML = "";
+
+        const newWelcome = document.createElement("div");
+
+        newWelcome.className = "welcome";
+
+        newWelcome.innerHTML = `
+            <h1>Nieuwe chat 👋</h1>
+            <p>Waar wil je het over hebben?</p>
+        `;
+
+        chat.appendChild(newWelcome);
+
+        input.focus();
+    }
+
+
+    sendButton.addEventListener("click", sendMessage);
+
+
+    input.addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+
+    });
+
+</script>
 
 </body>
 </html>
-```
